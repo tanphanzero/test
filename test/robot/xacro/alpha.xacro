@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<robot name="alpha" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <link name="base_link">
+        <visual name="">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.813 0.53 0.15"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.0 0.0 1.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.813 0.53 0.15"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <xacro:macro name="wheel" params="name x y">
+        <link name="${name}">
+            <visual name="">
+                <origin xyz="0.0 0.0 0.0" rpy="1.57079632679 0.0 0.0"/>
+                <geometry>
+                    <cylinder radius="0.1625" length="0.1"/>
+                </geometry>
+                <material name="">
+                    <color rgba="0.0 0.0 0.0 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="1.57079632679 0.0 0.0"/>
+                <geometry>
+                    <cylinder radius="0.1625" length="0.1"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="joint_${name}" type="continuous">
+            <origin xyz="${x} ${y} 0.0" rpy="0.0 0.0 0.0"/>
+            <parent link="base_link"/>
+            <child link="${name}"/>
+            <axis xyz="0.0 1.0 0.0"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:wheel name="wheel_rf" x="0.3765" y="0.3725"/>
+    <xacro:wheel name="wheel_lf" x="0.3765" y="-0.3725"/>
+    <xacro:wheel name="wheel_rr" x="-0.3765" y="0.3725"/>
+    <xacro:wheel name="wheel_lr" x="-0.3765" y="-0.3725"/>
+    
+</robot>
+
